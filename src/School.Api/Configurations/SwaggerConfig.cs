@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 
 namespace School.Api.Configurations;
@@ -27,6 +28,9 @@ public static class SwaggerConfig
                     Url = new Uri("https://www.github.com/LucasInoceencio/Escola")
                 }
             });
+
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            s.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
         });
     }
 
