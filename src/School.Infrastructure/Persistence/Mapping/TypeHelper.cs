@@ -71,7 +71,11 @@ public static class TypeHelper
 
     public static PropertyBuilder<DateTime> HasColumnDateTime(this PropertyBuilder<DateTime> property, string columnName)
     {
-        return property.HasColumnNameCustom("dt_" + columnName);
+        return property
+            .HasConversion(
+                v => v.ToUniversalTime(),
+                v => v.ToLocalTime())
+            .HasColumnNameCustom("dt_" + columnName);
     }
 
     public static PropertyBuilder<DateTime?> HasColumnDateTime(this PropertyBuilder<DateTime?> property, string columnName)
