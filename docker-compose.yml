@@ -1,0 +1,92 @@
+version: '3.8'
+services:
+    postgres:
+        container_name: postgresql
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: "loik4H6G@s"
+            POSTGRES_DB: "escola"
+        ports:
+            - "15432:5432"
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        networks:
+            - postgres-network
+
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "piresilucas@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "sl@0iSROs34e"
+        ports:
+            - "16543:80"
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        depends_on:
+            - postgres
+        networks:
+            - postgres-network
+
+    elasticsearch:
+        container_name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
+        networks:
+            - elastic-network
+        environment:
+            #- xpack.monitoring.enabled=true
+            - discovery.type=single-node
+            - ES_JAVA_OPTS=-Xms1g -Xmx1g
+            #- ELASTICSEARCH_USERNAME=elasticsearch
+            #- ELASTICSEARCH_PASSWORD=tse#1234
+            - bootstrap.memory_lock=false
+            - xpack.security.enabled=false
+
+    kibana:
+        container_name: kibana
+        image: docker.elastic.co/kibana/kibana:7.11.1
+        ports:
+            - "5601:5601"
+        depends_on:
+            - elasticsearch
+        environment:
+            - ELASTICSEARCH_URL=http://localhost:9200
+            - SERVERNAME=kibana120125
+            #- ELASTICSEARCH_USERNAME=elasticsearch
+            #- ELASTICSEARCH_PASSWORD=tse#1234
+        networks:
+            - elastic-network
+
+    school.api:
+        container_name: schoolapi
+        image: ${DOCKER_REGISTRY-}schoolapi
+        build:
+            context: .
+            dockerfile: src/School.Api/Dockerfile
+        links:
+            - elasticsearch
+        depends_on:
+            - postgres
+            - elasticsearch
+        networks:
+            - postgres-network
+            - elastic-network
+        ports:
+            - "80:80"
+        restart: on-failure
+
+networks:
+    elastic-network:
+        driver: bridge
+    postgres-network:
+        driver: bridge
+
+volumes:
+    elasticsearch-data:
+    postgres-data:
+    pgadmin-data:
