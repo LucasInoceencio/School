@@ -6,6 +6,7 @@ namespace School.Infrastructure.Persistence.Mapping;
 public static class TypeHelper
 {
     private static readonly bool isOracle;
+    private static readonly int _maxLengthOracle = 30;
     static TypeHelper()
     {
         //isOracle = System.Configuration.ConfigurationManager.ConnectionStrings["yourDbConnectionName"].ProviderName.IndexOf("oracle", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -15,8 +16,8 @@ public static class TypeHelper
     public static EntityTypeBuilder ToTableCustom(this EntityTypeBuilder entity, ModuleDatabase module, string tableName)
     {
         var fullName = module.Value + tableName;
-        if (fullName.Length > 30)
-            throw new ArgumentException("Não é permitido criar tabelas com nome superior a 30 caracteres.");
+        if (fullName.Length > _maxLengthOracle)
+            throw new ArgumentException($"Não é permitido criar tabelas com nome superior a {_maxLengthOracle} caracteres.");
 
         if (isOracle)
             return entity.ToTable(fullName.ToUpper());
@@ -26,8 +27,8 @@ public static class TypeHelper
 
     private static PropertyBuilder<T> HasColumnNameCustom<T>(this PropertyBuilder<T> property, string columnName)
     {
-        if (columnName.Length > 30)
-            throw new ArgumentException("Não é permitido criar colunas com nome superior a 30 caracteres.");
+        if (columnName.Length > _maxLengthOracle)
+            throw new ArgumentException($"Não é permitido criar colunas com nome superior a {_maxLengthOracle} caracteres.");
 
         if (isOracle)
             return property.HasColumnName(columnName.ToUpper());
@@ -100,8 +101,8 @@ public static class TypeHelper
 
     public static KeyBuilder HasNameCustom(this KeyBuilder keyBuilder, string name)
     {
-        if (name.Length > 30)
-            throw new ArgumentException("Não é permitido nomes com mais de 30 caracteres.");
+        if (name.Length > _maxLengthOracle)
+            throw new ArgumentException($"Não é permitido nomes com mais de {_maxLengthOracle} caracteres.");
         if (isOracle)
             return keyBuilder.HasName(name.ToUpper());
 

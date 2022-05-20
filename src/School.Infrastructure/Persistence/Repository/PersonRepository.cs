@@ -16,7 +16,7 @@ public class PersonRepository : IPersonRepository
         DbSet = Context.Set<Person>();
     }
 
-    public async void Add(Person person)
+    public void Add(Person person)
     {
         // var pessoaSerializada = JsonSerializer.Serialize(person);
         // Serilog.Log.Information(pessoaSerializada);

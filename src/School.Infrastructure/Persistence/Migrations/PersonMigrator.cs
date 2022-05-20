@@ -1,5 +1,4 @@
 using FluentMigrator;
-using FluentMigrator.Infrastructure;
 
 namespace School.Infrastructure.Persistence.Migrations;
 
@@ -18,11 +17,11 @@ public class PersonMigrator : Migration
             .WithColumn("birth_date").AsDate()
             .WithColumn("cpf").AsString().Unique()
             .WithColumn("email").AsString()
-            .WithColumn("type").AsString(1)
-            .WithColumn("memo").AsString()
+            .WithColumn("type").AsString(1).Nullable()
+            .WithColumn("memo").AsString().Nullable()
             .WithColumn("date_hour_register").AsDate()
             .WithColumn("registered_by").AsString()
-            .WithColumn("date_hour_changed").AsDate()
-            .WithColumn("changed_by").AsString();
+            .WithColumn("date_hour_changed").AsDate().Nullable()
+            .WithColumn("changed_by").AsString().Nullable();
     }
 }

@@ -29,7 +29,7 @@ public class PersonController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IActionResult> ObterPersons()
+    public async Task<IActionResult> GetPeople()
     {
         Serilog.Log.Information("Obtendo persons.");
         var persons = await _personService.GetAll();
@@ -42,7 +42,7 @@ public class PersonController : Controller
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> ObterPersonById(int id)
+    public async Task<IActionResult> GetPersonById(int id)
     {
         var person = await _personService.GetById(id);
 
@@ -58,7 +58,7 @@ public class PersonController : Controller
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<IActionResult> InserirPerson(PersonViewModel model)
+    public async Task<IActionResult> InsertPerson(PersonViewModel model)
     {
         _personService.Add(model);
         if (await _uow.Commit())
@@ -74,7 +74,7 @@ public class PersonController : Controller
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPut]
-    public async Task<IActionResult> AlterarPerson(int id, PersonViewModel model)
+    public async Task<IActionResult> AlterPerson(int id, PersonViewModel model)
     {
         var person = await _personService.GetById(id);
 
@@ -96,7 +96,7 @@ public class PersonController : Controller
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete]
-    public async Task<IActionResult> DeletarPersonAsync(int id)
+    public async Task<IActionResult> DeletePerson(int id)
     {
         var person = await _personService.GetById(id);
 
