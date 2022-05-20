@@ -8,5 +8,5 @@ public class PersonViewModel
     public DateTime BirthDate { get; set; }
     public string Cpf { get; set; }
     public string Email { get; set; }
-    public string RegisterBy { get; set; }
+    public string RegisteredBy { get; set; }
 }

@@ -27,7 +27,7 @@ public sealed class Person : Entity
     public Cpf Cpf { get; set; }
     public Email Email { get; set; }
     public char Type { get; set; } = 'F';
-    public string Memo { get; set; }
+    public string? Memo { get; set; }
     public string FullName =>
         $"{Name} {Lastname}";
 

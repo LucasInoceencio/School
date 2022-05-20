@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace School.Infrastructure.Persistence.Mapping;
 
-public static class TypeHelper
+public static class MapHelper
 {
-    private static readonly bool isOracle;
+    private static readonly bool _isOracle;
     private static readonly int _maxLengthOracle = 30;
-    static TypeHelper()
+    static MapHelper()
     {
-        //isOracle = System.Configuration.ConfigurationManager.ConnectionStrings["yourDbConnectionName"].ProviderName.IndexOf("oracle", StringComparison.OrdinalIgnoreCase) >= 0;
-        isOracle = true;
+        //_isOracle = System.Configuration.ConfigurationManager.ConnectionStrings["PostgreSqlConnection"].ProviderName.IndexOf("oracle", StringComparison.OrdinalIgnoreCase) >= 0;
+        _isOracle = false;
     }
 
     public static EntityTypeBuilder ToTableCustom(this EntityTypeBuilder entity, ModuleDatabase module, string tableName)
@@ -19,7 +19,7 @@ public static class TypeHelper
         if (fullName.Length > _maxLengthOracle)
             throw new ArgumentException($"Não é permitido criar tabelas com nome superior a {_maxLengthOracle} caracteres.");
 
-        if (isOracle)
+        if (_isOracle)
             return entity.ToTable(fullName.ToUpper());
 
         return entity.ToTable(fullName.ToLower());
@@ -30,7 +30,7 @@ public static class TypeHelper
         if (columnName.Length > _maxLengthOracle)
             throw new ArgumentException($"Não é permitido criar colunas com nome superior a {_maxLengthOracle} caracteres.");
 
-        if (isOracle)
+        if (_isOracle)
             return property.HasColumnName(columnName.ToUpper());
 
         return property.HasColumnName(columnName.ToLower());
@@ -103,7 +103,7 @@ public static class TypeHelper
     {
         if (name.Length > _maxLengthOracle)
             throw new ArgumentException($"Não é permitido nomes com mais de {_maxLengthOracle} caracteres.");
-        if (isOracle)
+        if (_isOracle)
             return keyBuilder.HasName(name.ToUpper());
 
         return keyBuilder.HasName(name);

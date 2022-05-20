@@ -1,4 +1,5 @@
 using FluentMigrator;
+using School.Infrastructure.Persistence.Mapping;
 
 namespace School.Infrastructure.Persistence.Migrations;
 
@@ -9,19 +10,16 @@ public class PersonMigrator : Migration
 
     public override void Up()
     {
-        Create.Table("person")
-            .WithColumn("id").AsInt64().PrimaryKey().Identity()
-            .WithColumn("active").AsBoolean()
-            .WithColumn("name").AsString()
-            .WithColumn("lastname").AsString()
-            .WithColumn("birth_date").AsDate()
-            .WithColumn("cpf").AsString().Unique()
-            .WithColumn("email").AsString()
-            .WithColumn("type").AsString(1).Nullable()
-            .WithColumn("memo").AsString().Nullable()
-            .WithColumn("date_hour_register").AsDate()
-            .WithColumn("registered_by").AsString()
-            .WithColumn("date_hour_changed").AsDate().Nullable()
-            .WithColumn("changed_by").AsString().Nullable();
+        Create.CustomTable(ModuleDatabase.ModuloCadastrosGerais, "person")
+            .WithInteger64CustomColumn("id").PrimaryKey().Identity()
+            .WithBooleanCustomColumn("active")
+            .WithVarcharCustomColumn("name", 100)
+            .WithVarcharCustomColumn("lastname", 100)
+            .WithDateCustomColumn("birth_date")
+            .WithVarcharCustomColumn("cpf", 200).Unique()
+            .WithVarcharCustomColumn("email", 200)
+            .WithCharCustomColumn("type")
+            .WithTextCustomColumn("memo").Nullable()
+            .WithEntityColumns();
     }
 }

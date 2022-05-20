@@ -6,5 +6,5 @@ public class Entity
     public DateTime DateHourRegister { get; set; }
     public string RegisteredBy { get; set; }
     public DateTime? DateHourChange { get; set; }
-    public string ChangedBy { get; set; }
+    public string? ChangedBy { get; set; }
 }

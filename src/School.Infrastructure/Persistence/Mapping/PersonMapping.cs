@@ -10,9 +10,9 @@ internal class PersonMap : IEntityTypeConfiguration<Person>
     public void Configure(EntityTypeBuilder<Person> builder)
     {
         // Definindo a tabela
-        builder.ToTableCustom(ModuleDatabase.ModuloCadastrosGerais, "pessoa");
+        builder.ToTableCustom(ModuleDatabase.ModuloCadastrosGerais, "person");
 
-        builder.EntityMap("pessoa");
+        builder.EntityMap("person");
 
         // Definindo demais propriedades
         builder.Property(p => p.Name)
@@ -47,19 +47,19 @@ internal class PersonMap : IEntityTypeConfiguration<Person>
             .HasColumnName("vr_email")
             .HasMaxLength(200);
 
-        builder.EntityMap();
-
         builder.HasIndex(p => p.Cpf)
             .IsUnique()
             .HasDatabaseName("idx_pessoa_cpf");
 
         builder.Property(p => p.Memo)
-            .HasColumnText("historico");
+            .HasColumnText("memo");
 
         builder.Property(p => p.Active)
-            .HasColumnBoolean("ativo");
+            .HasColumnBoolean("active");
 
         builder.Property(p => p.Type)
-            .HasColumnChar("status");
+            .HasColumnChar("type");
+
+        builder.EntityMap();
     }
 }
