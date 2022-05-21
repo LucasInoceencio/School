@@ -1,8 +1,11 @@
 using School.Api.Configurations;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+LogsConfig.ConfigureLogs();
+builder.Host.UseSerilog();
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddDependencyInjectionConfiguration();
 builder.Services.AddControllers();

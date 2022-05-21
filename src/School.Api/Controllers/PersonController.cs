@@ -13,15 +13,18 @@ public class PersonController : Controller
     private readonly IPersonService _personService;
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _uow;
+    private readonly ILogger<PersonController> _logger;
 
     public PersonController(
         IPersonService personService,
         IMapper mapper,
-        IUnitOfWork uow)
+        IUnitOfWork uow,
+        ILogger<PersonController> logger)
     {
         _personService = personService;
         _mapper = mapper;
         _uow = uow;
+        _logger = logger;
     }
 
     /// <summary>
@@ -32,7 +35,10 @@ public class PersonController : Controller
     public async Task<IActionResult> GetPeople()
     {
         Serilog.Log.Information("Obtendo persons.");
+        _logger.LogInformation("GetAll People - Teste");
         var persons = await _personService.GetAll();
+        Serilog.Log.Error("Testando serilog");
+        _logger.LogError("Getted all people - testando");
         return Ok(persons);
     }
 

@@ -6,11 +6,11 @@ public static class ApiConfig
     {
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        var configutarion = new ConfigurationBuilder()
+        var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env}.json", optional: true)
                 .Build();
 
-        return configutarion;
+        return configuration;
     }
 }
