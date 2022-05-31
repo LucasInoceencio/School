@@ -1,5 +1,4 @@
 using Serilog;
-using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
 using System.Reflection;
 
@@ -18,7 +17,7 @@ public static class LogsConfig
         // Create Logger
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .Enrich.WithExceptionDetails() // Adds details exception
+            //.Enrich.WithExceptionDetails() // Adds details exception
             .WriteTo.Debug()
             .WriteTo.Console()
             .WriteTo.Elasticsearch(ConfigureELS(configuration, env))

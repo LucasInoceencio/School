@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using School.Infrastructure.Persistence.Context;
+using School.Indentity.Data;
+using School.Infrastructure.Context;
 
 namespace School.Api.Configurations;
 
@@ -10,12 +11,20 @@ public static class DatabaseConfig
         if (services == null) throw new ArgumentNullException(nameof(services));
 
         services.AddDbContext<SchoolContext>(
-        context =>
-        {
-            context.UseNpgsql(
-                configuration.GetConnectionString("PostgreSqlConnection"),
-                b => b.MigrationsAssembly("School.Infrastructure"));
-        });
+            context =>
+            {
+                context.UseNpgsql(
+                    configuration.GetConnectionString("PostgreSqlConnection"),
+                    b => b.MigrationsAssembly("School.Infrastructure"));
+            });
+
+        services.AddDbContext<IdentityDataContext>(
+            context =>
+            {
+                context.UseNpgsql(
+                    configuration.GetConnectionString("PostgreSqlConnection"),
+                    b => b.MigrationsAssembly("School.Identity"));
+            });
 
         // Other providers
         //services.AddDbContext<EscolaContext>(

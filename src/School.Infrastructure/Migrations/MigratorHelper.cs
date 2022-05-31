@@ -1,8 +1,8 @@
 using FluentMigrator.Builders.Create;
 using FluentMigrator.Builders.Create.Table;
-using School.Infrastructure.Persistence.Mapping;
+using School.Infrastructure.Mapping;
 
-namespace School.Infrastructure.Persistence.Migrations;
+namespace School.Infrastructure.Migrations;
 
 public static class MigratorHelper
 {

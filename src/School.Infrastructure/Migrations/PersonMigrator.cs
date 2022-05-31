@@ -1,7 +1,7 @@
 using FluentMigrator;
-using School.Infrastructure.Persistence.Mapping;
+using School.Infrastructure.Mapping;
 
-namespace School.Infrastructure.Persistence.Migrations;
+namespace School.Infrastructure.Migrations;
 
 [Migration(20220519153025, "Creating person table")]
 public class PersonMigrator : Migration

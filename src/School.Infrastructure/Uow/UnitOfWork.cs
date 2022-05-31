@@ -1,7 +1,7 @@
 using School.Domain.Interfaces;
-using School.Infrastructure.Persistence.Context;
+using School.Infrastructure.Context;
 
-namespace School.Infrastructure.Persistence.Uow;
+namespace School.Infrastructure.Uow;
 
 public class UnitOfWork : IUnitOfWork
 {

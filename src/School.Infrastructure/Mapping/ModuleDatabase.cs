@@ -1,4 +1,4 @@
-namespace School.Infrastructure.Persistence.Mapping;
+namespace School.Infrastructure.Mapping;
 
 public class ModuleDatabase
 {

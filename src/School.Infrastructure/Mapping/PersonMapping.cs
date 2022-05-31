@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using School.Domain.Entities;
 using School.Domain.ValueObjects;
 
-namespace School.Infrastructure.Persistence.Mapping;
+namespace School.Infrastructure.Mapping;
 
 internal class PersonMap : IEntityTypeConfiguration<Person>
 {

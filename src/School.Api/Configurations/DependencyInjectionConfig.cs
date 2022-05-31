@@ -1,4 +1,9 @@
-using School.Infrastructure.Ioc;
+using School.Application.Interfaces;
+using School.Application.Services;
+using School.Domain.Interfaces;
+using School.Infrastructure.Context;
+using School.Infrastructure.Repository;
+using School.Infrastructure.Uow;
 
 namespace School.Api.Configurations;
 
@@ -8,6 +13,12 @@ public static class DependencyInjectionConfig
     {
         if (services == null) throw new ArgumentNullException(nameof(services));
 
-        NativeInjectorBootStrapper.RegisterServices(services);
+        services.AddScoped<IPersonService, PersonService>();
+
+        // Infrastructure
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddScoped<SchoolContext>();
+        //services.AddScoped<IdentityDataContext>();
     }
 }

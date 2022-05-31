@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using School.Domain.Entities;
 using School.Domain.Interfaces;
-using School.Infrastructure.Persistence.Context;
+using School.Infrastructure.Context;
 
-namespace School.Infrastructure.Persistence.Repository;
+namespace School.Infrastructure.Repository;
 
 public class PersonRepository : IPersonRepository
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using School.Domain.Entities;
 using School.Domain.Entities.Core;
 
-namespace School.Infrastructure.Persistence.Context;
+namespace School.Infrastructure.Context;
 
 public class SchoolContext : DbContext
 {

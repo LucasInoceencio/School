@@ -15,7 +15,12 @@
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
     <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.3.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
@@ -27,6 +32,8 @@
   <ItemGroup>
     <ProjectReference Include="..\School.Application\School.Application.csproj" />
     <ProjectReference Include="..\School.Infrastructure\School.Infrastructure.csproj" />
+    <ProjectReference Include="..\School.Identity\School.Identity.csproj" />
+    <ProjectReference Include="..\School.Domain\School.Domain.csproj" />
   </ItemGroup>
 
 </Project>

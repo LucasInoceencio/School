@@ -1,6 +1,6 @@
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.VersionTableInfo;
-using School.Infrastructure.Persistence.Migrations;
+using School.Infrastructure.Migrations;
 
 namespace School.Api.Configurations;
 

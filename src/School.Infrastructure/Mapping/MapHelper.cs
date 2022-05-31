@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace School.Infrastructure.Persistence.Mapping;
+namespace School.Infrastructure.Mapping;
 
 public static class MapHelper
 {

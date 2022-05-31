@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using School.Domain.Entities.Core;
 
-namespace School.Infrastructure.Persistence.Mapping;
+namespace School.Infrastructure.Mapping;
 
 public static class BaseMapping
 {
