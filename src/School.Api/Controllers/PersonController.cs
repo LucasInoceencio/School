@@ -66,6 +66,7 @@ public class PersonController : Controller
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
+    [Authorize(Roles = Roles.Admin)]
     [HttpPost]
     public async Task<IActionResult> InsertPerson(PersonViewModel model)
     {
