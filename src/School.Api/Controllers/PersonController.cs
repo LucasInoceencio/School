@@ -1,11 +1,14 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Interfaces;
 using School.Application.ViewModels;
 using School.Domain.Interfaces;
+using School.Identity.Constants;
 
 namespace School.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("person")]
 public class PersonController : Controller
@@ -102,6 +105,7 @@ public class PersonController : Controller
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete]
+    [Authorize(Policy = Policies.BussinessHours)]
     public async Task<IActionResult> DeletePerson(int id)
     {
         var person = await _personService.GetById(id);

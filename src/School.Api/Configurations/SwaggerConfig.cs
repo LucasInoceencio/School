@@ -31,7 +31,38 @@ public static class SwaggerConfig
 
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             s.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+            s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = @"JWT Authorization header using the Bearer scheme. 
+                                Enter 'Bearer' [space] and then your token in the text input below. 
+                                Example: 'Bearer seu.jwt.token'",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "oauth2",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+
+                    },
+                    new List<string>()
+                }
+            });
         });
+        
     }
 
     public static void UseSwaggerSetup(this IApplicationBuilder app)

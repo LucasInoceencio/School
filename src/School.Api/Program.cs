@@ -15,6 +15,8 @@ builder.Services.AddSwaggerConfiguration();
 builder.Services.AddAutoMapperConfiguration();
 builder.Services.AddValidatorConfiguration();
 builder.Services.AddFluentMigrator(builder.Configuration);
+builder.Services.AddAuthentication(builder.Configuration);
+builder.Services.AddAuthorizationPolicies();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +29,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
