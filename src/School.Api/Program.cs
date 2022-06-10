@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using School.Api.Configurations;
+using School.Indentity.Data;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,7 @@ builder.Services.AddAutoMapperConfiguration();
 builder.Services.AddValidatorConfiguration();
 builder.Services.AddFluentMigrator(builder.Configuration);
 builder.Services.AddAuthentication(builder.Configuration);
+builder.Services.AddCors();
 builder.Services.AddAuthorizationPolicies();
 var app = builder.Build();
 
@@ -27,11 +30,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 app.UseAuthentication();
-
+app.UseCors(c =>
+    c.SetIsOriginAllowed(orign => true)
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<IdentityDataContext>();
+    context.Database.Migrate();
+}
 
 app.UpdateDatabase();
 
